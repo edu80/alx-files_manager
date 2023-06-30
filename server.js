@@ -1,10 +1,14 @@
-const express = require('express');
-const router = require('./routes/index');
+import express from 'express';
+import router from './routes/index';
 
-const server = express();
-const PORT = process.env.PORT ? process.env.PORT : 5000;
+const port = parseInt(process.env.PORT, 10) || 5000;
+const app = express();
 
-server.use(express.json());
-server.use(router);
+app.use(express.json());
+app.use('/', router);
 
-server.listen(PORT, () => console.log(`The server is running on port: ${PORT}`));
+app.listen(port, () => {
+  console.log(`server running on port ${port}`);
+});
+
+export default app;
